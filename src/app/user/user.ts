@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,computed,signal,Input} from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
 
 @Component({
@@ -7,5 +7,18 @@ import { DUMMY_USERS } from '../dummy-users';
   templateUrl: './user.html'
 })
 export class UserComponent {
-  selectedUser = DUMMY_USERS[Math.floor(Math.random() * DUMMY_USERS.length)];
+
+  
+onSelectUser() {
+throw new Error('Method not implemented.');
 }
+  @Input() avatar!:string ;
+  @Input() name!:string ;
+
+  get ImagePath(){
+    return `${this.avatar}`;
+  }
+
+}
+
+
