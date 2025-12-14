@@ -1,0 +1,74 @@
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50" (click)="onCancel()">
+  <div class="bg-purple-900/90 rounded-2xl p-8 w-full max-w-md border border-purple-500/30 shadow-2xl" (click)="$event.stopPropagation()">
+
+    <div class="mb-6">
+      <h2 class="text-2xl font-Poppins font-bold text-purple-200">Add New Task</h2>
+      <p class="text-sm text-purple-300/70 mt-1">Create a new task</p>
+    </div>
+
+    <form (ngSubmit)="onAddTask()" class="space-y-5">
+      <div>
+        <label for="title" class="block text-sm font-medium text-purple-200 mb-2">
+          Task Title
+        </label>
+        <input
+          type="text"
+          id="title"
+          [(ngModel)]="t"
+          name="title"
+          required
+          placeholder="Enter task title"
+          class="w-full px-4 py-2.5 bg-purple-800/30 border border-purple-500/30 rounded-lg text-purple-100 placeholder-purple-400/50 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+        />
+      </div>
+
+      <!-- Summary Input -->
+      <div>
+        <label for="summary" class="block text-sm font-medium text-purple-200 mb-2">
+          Summary
+        </label>
+        <textarea
+          id="summary"
+          [(ngModel)]="s"
+          name="summary"
+          required
+          rows="4"
+          placeholder="Describe the task..."
+          class="w-full px-4 py-2.5 bg-purple-800/30 border border-purple-500/30 rounded-lg text-purple-100 placeholder-purple-400/50 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all resize-none"
+        ></textarea>
+      </div>
+
+      <!-- Due Date Input -->
+      <div>
+        <label for="date" class="block text-sm font-medium text-purple-200 mb-2">
+          Due Date
+        </label>
+        <input
+          type="date"
+          id="date"
+          [(ngModel)]="d"
+          name="date"
+          required
+          class="w-full px-4 py-2.5 bg-purple-800/30 border border-purple-500/30 rounded-lg text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+        />
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex gap-3 pt-4">
+        <button
+          type="button"
+          (click)="onCancel()"
+          class="flex-1 px-4 py-2.5 bg-purple-800/30 hover:bg-purple-800/50 text-purple-200 font-medium rounded-lg border border-purple-500/30 transition-all duration-200"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="flex-1 px-4 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-lg shadow-lg hover:shadow-purple-500/50 transition-all duration-200"
+        >
+          Add Task
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

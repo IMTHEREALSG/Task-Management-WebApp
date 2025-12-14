@@ -11,9 +11,14 @@ export class CardComponent {
   @Input({required : true}) task !: Task[];
 
   delete = output<string>();
+  addTask = output<void>();
 
   onDeleteTask(tid: string) {
     this.delete.emit(tid);
+  }
+
+  onAddTask() {
+    this.addTask.emit();
   }
 
 }
