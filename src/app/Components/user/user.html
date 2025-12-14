@@ -1,0 +1,21 @@
+<div class="w-60 rounded-md shadow-lg overflow-hidden">
+  <button
+    [ngClass]="{
+      'bg-purple-500 text-white shadow-xl': selected,
+      'bg-purple-400/25 text-purple-200 hover:bg-purple-500 hover:text-white': !selected
+    }"
+    class="flex items-center justify-start gap-2 px-2 py-1.5 cursor-pointer w-full min-w-40 transition-all duration-200"
+    (click)="onSelectUser()"
+  >
+    <img
+      [src]="ImagePath()"
+      [alt]="user.name"
+      class="w-8 h-8 object-contain rounded-full shadow-lg shrink-0"
+      [class.ring-2]="selected"
+      [class.ring-white]="selected"
+    />
+    <div class="mx-5 flex items-center">
+      <span class="text-sm font-medium">{{user.name}}</span>
+    </div>
+  </button>
+</div>

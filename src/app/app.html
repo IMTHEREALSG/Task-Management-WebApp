@@ -1,23 +1,30 @@
-<app-header></app-header>
-<div class="max-w-2xl mx-auto my-14">
-  <ul id = "users" class="flex flex-col gap-2">
-    <li>
-      <app-user [avatar]="users[0].avatar" [name]="users[0].name"></app-user>
-    </li>
-    <li>
-      <app-user [avatar]="users[1].avatar" [name]="users[1].name"></app-user>
-    </li>
-    <li>
-      <app-user [avatar]="users[2].avatar" [name]="users[2].name"></app-user>
-    </li>
-    <li>
-      <app-user [avatar]="users[3].avatar" [name]="users[3].name"></app-user>
-    </li>
-    <li>
-      <app-user [avatar]="users[4].avatar" [name]="users[4].name"></app-user>
-    </li>
-    <li>
-      <app-user [avatar]="users[5].avatar" [name]="users[5].name"></app-user>
-    </li>
-  </ul>
+<div class="justify-center">
+  <app-header></app-header>
+</div>
+<div class="flex my-14 justify-center gap-6">
+  <div class="max-w-xl">
+    <ul id="users" class="flex flex-col gap-2 mr-2.5">
+      @for(user of users; track user.id){
+        <li>
+          <app-user
+            [user]="user"
+            [selected]="selectedUserId() === user.id"
+            (select)="onSelectUser($event)"
+          />
+        </li>
+      }
+    </ul>
+  </div>
+
+  @if (selectedUserTasks().length > 0) {
+    <app-card
+      (delete)="onDeleteTask($event)"
+      [name]="selectedUserName()"
+      [task]="selectedUserTasks()">
+    </app-card>
+  } @else {
+    <div class="bg-purple-400/10 rounded-lg p-8 text-center border border-purple-500/20 w-104">
+      <p class="text-purple-300 font-Poppins text-lg">📋 No tasks for {{ selectedUserName() }}</p>
+    </div>
+  }
 </div>

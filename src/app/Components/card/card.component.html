@@ -1,0 +1,67 @@
+<!-- <div class="bg-purple-400/25 w-104 shadow-2xl rounded-lg p-3 flex flex-col h-76">
+  <div class="flex flex-wrap px-1 py-2">
+    <p class="text-purple-200/90 font-Poppins text-2xl font-medium">
+      {{task.title}}
+    </p>
+  </div>
+  <div class="flex flex-wrap p-1 grow">
+    <p class="text-purple-200/30">
+      {{task.summary}}
+    </p>
+  </div>
+  <div class="flex flex-wrap p-2 justify-end">
+    <p class="text-purple-200/90 text-sm/tight">
+      {{task.dueDate}}
+    </p>
+  </div>
+</div> -->
+
+<section id="tasks" class="bg-purple-400/25 w-104 shadow-2xl rounded-lg p-6 flex flex-col min-h-96">
+  <header class="flex justify-between items-center pb-4 border-b border-purple-500/20">
+    <h2 class="text-purple-200/90 font-Poppins text-2xl font-bold">{{name}}'s Tasks</h2>
+    <menu class="m-0 p-0">
+      <button class="bg-purple-600/40 hover:bg-purple-500 active:bg-purple-600 text-purple-100 font-Poppins text-sm font-medium px-1 py-2 rounded-lg border border-purple-500/30 transition-all duration-200 cursor-pointer hover:shadow-lg hover:scale-105">
+        Add Task
+      </button>
+    </menu>
+  </header>
+
+  <ul class="flex flex-col gap-3 mt-4 flex-1 overflow-y-auto custom-scrollbar">
+      @for(item of task; track item.id){
+        <li class="bg-purple-500/10 rounded-lg p-4 border border-purple-500/20 hover:bg-purple-500/15 hover:border-purple-500/40 transition-all duration-200 group">
+        <!-- Task Header with Actions -->
+        <div class="flex justify-between items-start mb-3">
+          <h3 class="text-purple-200/90 font-Poppins text-lg font-semibold flex-1">
+            {{item.title}}
+          </h3>
+          <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <button class="text-purple-300 hover:text-purple-100 p-1 rounded hover:bg-purple-500/20 transition-colors" title="Edit">
+              Edit
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <p class="text-purple-200/60 text-sm leading-relaxed line-clamp-3">
+            {{item.summary}}
+          </p>
+        </div>
+
+
+        <div class="flex justify-between items-center pt-3 border-t border-purple-500/10">
+          <div class="flex items-center gap-2">
+            <span class="text-purple-200/90 text-sm font-light font-Poppins">
+              {{item.dueDate}}
+            </span>
+          </div>
+          <button
+            (click)="onDeleteTask(item.id)"
+          class="text-xs bg-purple-600/30 hover:bg-purple-600/50 text-purple-200 px-3 py-1 rounded-full transition-colors duration-200">
+            Mark Complete
+          </button>
+        </div>
+      </li>
+      }
+  </ul>
+</section>
+
