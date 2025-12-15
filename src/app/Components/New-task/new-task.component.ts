@@ -22,6 +22,11 @@ export class NewTaskComponent {
   }
 
   onAddTask(){
+    if(!this.t().trim() || !this.s().trim() || !this.d().trim()){
+      alert('Please fill in all fields.');
+      return;
+    }
+
     this.add.emit({
       title: this.t(),
       summary: this.s(),

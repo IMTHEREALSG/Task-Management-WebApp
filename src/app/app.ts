@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { HeaderComponent } from './Components/header/header.component';
 import { UserComponent } from "./Components/user/user";
 import { DUMMY_USERS } from './dummy-users';
@@ -6,6 +6,7 @@ import { DUMMY_TASKS } from './dummy-tasks';
 import { CardComponent } from "./Components/card/card.component";
 import { NewTaskData } from './models/NewTask.model';
 import { NewTaskComponent } from "./Components/New-task/new-task.component";
+import { Task } from './models/task.model';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,15 @@ import { NewTaskComponent } from "./Components/New-task/new-task.component";
 })
 export class App {
   users = DUMMY_USERS;
-  tasks = signal(DUMMY_TASKS);
+  tasks = signal<Task[]>(this.loadTasks())
   selectedUserId = signal('u1');
   isAddingTask = signal(false);
+
+  constructor(){
+   effect(() => {
+      this.saveTasks(this.tasks());
+    });
+  }
 
   selectedUserTasks = computed(() =>
     this.tasks().filter(task => task.userId === this.selectedUserId())
@@ -55,5 +62,24 @@ export class App {
     this.tasks.update(currenttasks => [...currenttasks, newTask]);
 
     this.isAddingTask.set(false);
+  }
+
+
+  private loadTasks(): Task[]{
+    try{
+      const storedTasks = localStorage.getItem('tasks');
+      return storedTasks ? JSON.parse(storedTasks) : DUMMY_TASKS;
+    }catch(error){
+      console.error('Error loading tasks from localStorage:', error);
+      return DUMMY_TASKS;
+    }
+  }
+
+  private saveTasks(tasks: Task[]){
+    try{
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }catch(error){
+      console.error('Error saving tasks to localStorage:', error);
+    }
   }
 }
